@@ -1,0 +1,35 @@
+{
+  "name": "desktop-ui-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "protractor.conf.js",
+  "scripts": {
+    "pretest": "node node_modules/protractor/bin/webdriver-manager update",
+    "test": "node node_modules/protractor/built/cli.js config.js --suite preconditions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://andriybogash@bitbucket.org/swanqa/abc-fastlane-client-automation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/swanteam/desktop-ui-automation#readme",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.40",
+    "@types/node": "^6.0.46",
+    "@types/selenium-webdriver": "^2.53.39",
+    "grunt": "^1.0.1",
+    "jasmine-allure-reporter": "^1.0.1",
+    "jasmine-reporters": "^2.2.0",
+    "jasmine-spec-reporter": "^2.7.0",
+    "node-env-file": "^0.1.8",
+    "path": "^0.12.7",
+    "protractor": "^5.0.0",
+    "protractor-helpers": "^1.0.2",
+    "protractor-jasmine2-html-reporter": "0.0.6",
+    "protractor-jasmine2-screenshot-reporter": "^0.3.2",
+    "q": "^1.4.1",
+    "typescript": "^2.1.5",
+    "underscore": "^1.8.3"
+  }
+}

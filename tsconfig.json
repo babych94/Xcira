@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "./built/",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "noImplicitAny": false,
+    "lib": ["dom", "es2015.promise", "es5"],
+    "types" : [
+      "jasmine","selenium-webdriver","q","node"
+    ]
+
+  },
+  "exclude": [
+    "node_modules",
+    "typings",
+    "node_modules/protractor"
+  ]
+}
