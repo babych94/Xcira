@@ -25,7 +25,7 @@ exports.config = {
     },
 
     suites: {
-        regression_test: [
+        preconditions: [
             'built/scenarios/preconditions/*.js'
         ]
     },

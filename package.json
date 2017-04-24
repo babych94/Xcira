@@ -2,18 +2,18 @@
   "name": "desktop-ui-automation",
   "version": "1.0.0",
   "description": "",
-  "main": "protractor.conf.js",
+  "main": "config.js",
   "scripts": {
     "pretest": "node node_modules/protractor/bin/webdriver-manager update",
     "test": "node node_modules/protractor/built/cli.js config.js --suite preconditions"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://andriybogash@bitbucket.org/swanqa/abc-fastlane-client-automation.git"
+    "url": "git+https://github.com/babych94/Xcira.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/swanteam/desktop-ui-automation#readme",
+  "homepage": "https://github.com/babych94/Xcira.git",
   "devDependencies": {
     "@types/jasmine": "^2.5.40",
     "@types/node": "^6.0.46",

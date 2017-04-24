@@ -1,0 +1,12 @@
+.idea/
+.env
+
+.idea
+target/
+testresults
+/target
+node_modules
+built/
+built
+allure-results/
+protractor-allure-plugin-generate-html.iml
