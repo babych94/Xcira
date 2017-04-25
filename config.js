@@ -26,7 +26,8 @@ exports.config = {
 
     suites: {
         preconditions: [
-            'built/scenarios/preconditions/*.js'
+            'built/scenarios/preconditions/*.js',
+            'built/scenarios/Admin/*.js'
         ]
     },
 

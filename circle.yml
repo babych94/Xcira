@@ -1,0 +1,25 @@
+  general:
+    artifacts:
+      - "target/main_report"
+
+
+  machine:
+      node:
+          version: 6.2.2
+      java:
+          version: openjdk8
+
+  dependencies:
+      override:
+      - npm install
+      - node node_modules/typescript/bin/tsc:
+                  background: true
+      - cp sample.env .env
+
+  test:
+    override:
+      - npm test
+      - mvn site -Dallure.results_pattern=allure-results
+      - mkdir $CIRCLE_ARTIFACTS/target
+      - mv target $CIRCLE_ARTIFACTS/target
+      - cp Report.html $CIRCLE_ARTIFACTS/target/target

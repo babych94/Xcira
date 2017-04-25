@@ -4,6 +4,11 @@ import Promise = webdriver.promise.Promise;
 import webdriver = require("selenium-webdriver");
 class PageAbstract {
 
+
+    getPageUrl(){
+        return browser.getCurrentUrl();
+    }
+
     protected timeout = 10000;
 
 
