@@ -13,7 +13,7 @@ class BanksPage extends PageAbstract {
         return this.elementIsDisplayed(this.addBankButton);
     };
 
-
 }
+
 
 export = BanksPage;
