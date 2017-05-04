@@ -13,6 +13,7 @@ describe('ABC FastLane Testing', function () {
         browser.get('/sign-in');
         expect(loginPage.loginPageIsDisplayed()).toBeTruthy("check that login page is open");
         loginPage.loginAs(process.env.ADMIN_EMAIL, process.env.ADMIN_PSW);
+        expect(loginPage.homeScreenIsDisplayed()).toBeTruthy("Switch Site Button is not displayed");
     });
 
     // it("Check that user was logged in", function () {

@@ -10,6 +10,7 @@ class LoginPage extends PageAbstract {
     emailField = element.all(by.css("[name='email']")).get(1);
     passwordField = element(by.css("[name='password']"));
     signInBtn = element(by.css("[class='loginButton btn btn-default']"));
+    switchSiteButton = element(by.xpath(".//*/div/div[1]/div[1]/div[4]/div/div/div"));
 
     setEmail(email: string){
         this.emailField.sendKeys(email)
@@ -53,6 +54,11 @@ class LoginPage extends PageAbstract {
 
     signInBtnIsDisplayed() {
         return this.elementIsDisplayed(this.signInBtn);
+    }
+    homeScreenIsDisplayed() {
+        browser.wait(EC.invisibilityOf(this.switchSiteButton), 10000);
+        return this.elementIsDisplayed(this.switchSiteButton);
+
     }
 }
 export = LoginPage;
