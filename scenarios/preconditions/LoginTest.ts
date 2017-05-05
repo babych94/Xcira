@@ -12,7 +12,8 @@ describe('ABC FastLane Testing', function () {
     it ('open login page and enter user credentials', function () {
         browser.get('/sign-in');
         expect(loginPage.loginPageIsDisplayed()).toBeTruthy("check that login page is open");
-        loginPage.loginAs(process.env.ADMIN_EMAIL, process.env.ADMIN_PSW);
+        loginPage.loginAs(process.env.ACCOUNTING_EMAIL, process.env.ADMIN_PSW);
+        browser.sleep(4000);
     });
 
     // it("Check that user was logged in", function () {
