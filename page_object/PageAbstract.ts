@@ -102,6 +102,10 @@ class PageAbstract {
     public clickLogoutButton() {
         this.logoutButton.click();
     }
+
+    public WaitTillElementBePresenOnPage(webElement){
+        browser.wait(ExpectedConditions.visibilityOf(webElement), 10000);
+    }
 }
 
 export = PageAbstract;

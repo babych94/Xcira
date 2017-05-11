@@ -1,8 +1,10 @@
 import {browser, element, by, By, $, $$, ExpectedConditions as EC} from 'protractor';
 
 import ChartOfAccountsPage = require("../../page_object/ChartOfAccountsPage");
+import PageAbstract = require("../../page_object/PageAbstract");
 describe('ABC FastLane Testing', function () {
     let chartOfAccounts = new ChartOfAccountsPage;
+    let pageAbstract = new PageAbstract;
     let number = (Math.random()*Math.random()*100000);
     let name = (Math.random()*Math.random()*100000);
 
@@ -13,13 +15,13 @@ describe('ABC FastLane Testing', function () {
 
     it ('Add Account', function () {
         chartOfAccounts.AddAccount(name.toLocaleString(), number.toLocaleString(), "123.00");
-        chartOfAccounts.FindedAccountCheck(name.toLocaleString());
-        chartOfAccounts.AccountFirstItemInList.getText().then((data) => expect(data).toEqual(number.toLocaleString()));
+        chartOfAccounts.FindedAccountFilterByName(name.toLocaleString());
+        chartOfAccounts.AccountFirstItemInListText().then((data) => expect(data).toEqual(number.toLocaleString()));
     });
 
     it ('Cancel Adding Account', function () {
         chartOfAccounts.CancelAddingAccount((name+200).toLocaleString(), (number+200).toLocaleString(), "123.00");
-        chartOfAccounts.FindedAccountCheck((name+200).toLocaleString());
+        chartOfAccounts.FindedAccountFilterByName((name+200).toLocaleString());
         expect(chartOfAccounts.TableIsEmpty()).toBeFalsy("check that Cancel Adding Account");
     });
 
@@ -42,35 +44,34 @@ describe('ABC FastLane Testing', function () {
     });
 
     it ('Filter data in the grid by Account Name', function () {
-        chartOfAccounts.FindedAccountCheck(name.toLocaleString());
-        chartOfAccounts.AccountFirstAccountNameInList.getText().then((data) => expect(data).toEqual(name.toLocaleString()));
+        chartOfAccounts.FindedAccountFilterByName(name.toLocaleString());
+        chartOfAccounts.AccountFirstAccountNameInListText().then((data) => expect(data).toEqual(name.toLocaleString()));
     });
 
     it ('Filter data in the grid by Account Type and Account Name', function () {
         chartOfAccounts.OpenAccountSummeryFilterAccountTypeDropdown();
         chartOfAccounts.ChooseFilterAccountTypeAsset();
-        chartOfAccounts.setFilterAccountNamber(name.toLocaleString());
+        chartOfAccounts.setFilterAccountName(name.toLocaleString());
         chartOfAccounts.ClickFilterApplyButton();
-        chartOfAccounts.AccountFirstAccountNameInList.getText().then((data) => expect(data).toEqual(name.toLocaleString()));
+        chartOfAccounts.AccountFirstAccountNameInListText().then((data) => expect(data).toEqual(name.toLocaleString()));
         expect(chartOfAccounts.ChecFilterAccountTypewithAssetItem()).toBeTruthy("check filter");
     });
 
     it ('Edit Account', function () {
-        chartOfAccounts.FindedAccountCheck(name.toLocaleString());
+        chartOfAccounts.FindedAccountFilterByName(name.toLocaleString());
         chartOfAccounts.ClickThreePointIconInFirstRowInList();
         chartOfAccounts.ClickEditAccountButton();
         chartOfAccounts.setEditAccountAccountNameField("Test Editing");
         chartOfAccounts.ClicEditAccountSaveButton();
-        browser.sleep(2000);
-        chartOfAccounts.AccountFirstAccountNameInList.getText().then((data) => expect(data).toEqual(name.toLocaleString() + "Test Editing"));
+        chartOfAccounts.AccountFirstAccountNameInListText().then((data) => expect(data).toEqual(name.toLocaleString() + "Test Editing"));
     });
 
     it ('Disable Account', function () {
-        chartOfAccounts.FindedAccountCheck(name.toLocaleString() + "Test Editing");
+        chartOfAccounts.FindedAccountFilterByName(name.toLocaleString() + "Test Editing");
         chartOfAccounts.ClickThreePointIconInFirstRowInList();
         chartOfAccounts.ClickDisableAccountButton();
         chartOfAccounts.ClickDisableAccountDisableButton();
-        chartOfAccounts.FindedAccountCheck(name.toLocaleString() + "Test Editing");
+        chartOfAccounts.FindedAccountFilterByName(name.toLocaleString() + "Test Editing");
         expect(chartOfAccounts.TableIsEmpty()).toBeFalsy("account is disable");
     });
 

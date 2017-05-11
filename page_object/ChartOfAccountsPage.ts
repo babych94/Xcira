@@ -33,65 +33,52 @@ class ChartOfAccountsPage extends PageAbstract{
     DisableAccountButton = element(by.xpath("html/body/div/div/div[3]/div[2]/div/div[2]/div[3]/div[5]/div[2]/div/div/div/div/div/div[1]/div/div[4]/div[2]/div/div/div[2]/div/div/div/div/h4[2]"));
     DisableAccountDisableButton = element(by.xpath("html/body/div/div/div[3]/div[2]/div/div[2]/div[3]/div[3]/div[2]/div[2]/div/div/div[3]/button[2]"));
 
-
-    setAccountName(AccountName: string){
-        this.AccountNameField.sendKeys(AccountName)
-    };
-    setAccountNumber(AccountNumber: string){
-        this.AccountNumberField.sendKeys(AccountNumber)
-    };
-    setBeginningBalance(BeginningBalance: string){
-        this.BeginningBalanceField.sendKeys(BeginningBalance)
-    };
-
-    setFilterAccountNamber(AccountNamber: string){
-        this.FilterAccountNamberField.sendKeys(AccountNamber)
+    setFilterAccountName(AccountName: string){
+        this.WaitTillElementBePresenOnPage(this.FilterAccountNamberField);
+        this.FilterAccountNamberField.sendKeys(AccountName);
     };
 
     setEditAccountAccountNameField(AccountNamber: string){
-        this.EditAccountAccountNameField.sendKeys(AccountNamber)
+        this.WaitTillElementBePresenOnPage(this.EditAccountAccountNameField);
+        this.EditAccountAccountNameField.sendKeys(AccountNamber);
     }
 
-    AddAccount(AccountName: string,AccountNumber: string,BeginningBalance: string){
+    FillAccountFields(AccountName: string,AccountNumber: string,BeginningBalance: string){
+        this.WaitTillElementBePresenOnPage(this.AddAccountButton);
         this.AddAccountButton.click();
-        this.setAccountName(AccountName);
+        this.AccountNameField.sendKeys(AccountName);
         this.AccountNumberField.click();
-        this.setAccountNumber(AccountNumber);
+        this.AccountNumberField.sendKeys(AccountNumber);
         this.AccountTypeDropdown.click();
         this.AccountTypeDropdown.click();
         this.firstElementAccountDropdown.click();
         this.BeginningBalanceField.click();
-        this.setBeginningBalance(BeginningBalance);
+        this.BeginningBalanceField.sendKeys(BeginningBalance);
+    }
+
+    AddAccount(AccountName: string,AccountNumber: string,BeginningBalance: string){
+        this.FillAccountFields(AccountName, AccountNumber, BeginningBalance);
         this.AccountNumberField.click();
         this.SaveButton.click();
         browser.sleep(2000);
     };
 
     CancelAddingAccount(AccountName: string,AccountNumber: string,BeginningBalance: string){
-        this.AddAccountButton.click();
-        this.setAccountName(AccountName);
-        this.AccountNumberField.click();
-        this.setAccountNumber(AccountNumber);
-        this.AccountTypeDropdown.click();
-        this.AccountTypeDropdown.click();
-        this.firstElementAccountDropdown.click();
-        this.BeginningBalanceField.click();
-        this.setBeginningBalance(BeginningBalance);
+        this.FillAccountFields(AccountName, AccountNumber, BeginningBalance);
         this.AccountNumberField.click();
         this.CancelButton.click();
-        browser.sleep(2000);
     };
 
     TableIsEmpty(){
-       return this.AccountFirstItemInList.isPresent();
+        return this.AccountFirstItemInList.isPresent();
     }
 
-    FindedAccountCheck(AccountName: string){
+    FindedAccountFilterByName(AccountName: string){
+        this.WaitTillElementBePresenOnPage(this.FilterButton);
         this.FilterButton.click();
-        this.setFilterAccountNamber(AccountName);
+        this.setFilterAccountName(AccountName);
         this.FilterApplyButton.click();
-
-        browser.sleep(5000);
+        browser.sleep(2000);
     }
 
     ChartOfAccountsPageIsDisplayed(){
@@ -99,41 +86,60 @@ class ChartOfAccountsPage extends PageAbstract{
     }
 
     OpenAccountSummeryFilterAccountTypeDropdown(){
+        this.WaitTillElementBePresenOnPage(this.FilterButton);
         this.FilterButton.click();
         this.FilterAccountTypeDropdown.click();
     }
 
     ChooseFilterAccountTypeAsset(){
+        this.WaitTillElementBePresenOnPage(this.FilterAsset);
         this.FilterAsset.click();
     }
 
     ChooseFilterAccountTypeEquity(){
+        this.WaitTillElementBePresenOnPage(this.FilterEquity);
         this.FilterEquity.click();
     }
 
     ClickFilterApplyButton(){
-        this.FilterApplyButton.click()
+        this.FilterApplyButton.click();
+        browser.sleep(2000);
     }
 
     ClickThreePointIconInFirstRowInList(){
+        this.WaitTillElementBePresenOnPage(this.ThreePointIcon);
         this.ThreePointIcon.click();
     }
 
     ClickEditAccountButton(){
+        this.WaitTillElementBePresenOnPage(this.EditAccountButton);
         this.EditAccountButton.click();
     }
 
     ClicEditAccountSaveButton(){
+        this.WaitTillElementBePresenOnPage(this.EditAccountSaveButton);
         this.EditAccountSaveButton.click();
+        browser.sleep(2000);
     }
 
     ClickDisableAccountButton(){
+        this.WaitTillElementBePresenOnPage(this.DisableAccountButton);
         this.DisableAccountButton.click();
     }
 
     ClickDisableAccountDisableButton(){
+        this.WaitTillElementBePresenOnPage(this.DisableAccountDisableButton);
         this.DisableAccountDisableButton.click();
         browser.sleep(2000);
+    }
+    AccountFirstAccountNameInListText() {
+        this.WaitTillElementBePresenOnPage(this.AccountFirstAccountNameInList);
+        return this.AccountFirstAccountNameInList.getText();
+    }
+
+    AccountFirstItemInListText() {
+        this.WaitTillElementBePresenOnPage(this.AccountFirstItemInList);
+        return this.AccountFirstItemInList.getText();
     }
 
     Checkitem1(){
@@ -153,19 +159,21 @@ class ChartOfAccountsPage extends PageAbstract{
     }
 
     ChecFilterAccountTypewithEquityItem(){
-        browser.sleep(2000);
+        this.WaitTillElementBePresenOnPage(this.AccountFirstAccountTypeInList.first());
         return this.AccountFirstAccountTypeInList.first().getText().then((data) => {return data == ("Equity")});
     }
 
     ChecFilterAccountTypewithAssetItem(){
-        browser.sleep(2000);
+        this.WaitTillElementBePresenOnPage(this.AccountFirstAccountTypeInList.first());
         return this.AccountFirstAccountTypeInList.first().getText().then((data) => {return data == ("Asset")});
     }
     CheckActiveAccountsAccountSummerySectionTitle(){
+        this.WaitTillElementBePresenOnPage(this.AccountSummeryTitle);
         return this.AccountSummeryTitle.getText().then((data) => {return data == ("Account Summary")});
     }
 
     CheckActiveAccountsAccountSummerySectionDateofLastTransfer(){
+        this.WaitTillElementBePresenOnPage(this.DateofLastTransfer.last());
         return this.DateofLastTransfer.last().getText().then((data) => {return data == ("3/2/2017 by nrichards")});
     }
 }
